@@ -1,16 +1,41 @@
 ## Slam Toolbox
 
-| DockerHub  | [![Build Status](https://img.shields.io/docker/cloud/build/stevemacenski/slam-toolbox.svg?label=build)](https://hub.docker.com/r/stevemacenski/slam-toolbox) | [![Build Status](https://img.shields.io/docker/pulls/stevemacenski/slam-toolbox.svg?maxAge=2592000)](https://hub.docker.com/r/stevemacenski/slam-toolbox) |
-|-----|----|----|
-| **Build Farm** | [![Build Status](http://build.ros.org/buildStatus/icon?job=Mdev__slam_toolbox__ubuntu_bionic_amd64)](http://build.ros.org/view/Kbin_uX64/job/Mdev__slam_toolbox__ubuntu_bionic_amd64/) | N/A |
 
-We've received feedback from users and have robots operating in the following environments with SLAM Toolbox:
-- Retail
-- Warehouses
-- Libraries
-- Research
+### 실행 명령어
 
-[![IMAGE ALT TEXT](https://user-images.githubusercontent.com/14944147/74176653-f69beb80-4bec-11ea-906a-a233541a6064.png)](https://vimeo.com/378682207)
+#### 맵 파일 저장
+
+- pgm, yaml 형식의 맵 데이터 저장
+
+```
+rosservice call /slam_toolbox/save_map "name:
+  data: '/home/syscon/catkin_ws/src/slam_toolbox/map/map'" 
+```
+
+#### pose graph 관련 파일 저장
+
+- pose graph와 연관된 .data, .posegraph 맵 데이터 저장. /home/syscon 대신 ~을 사용하면 안된다. 절대 경로는 잘 입력 해줘야 한다.
+
+```
+rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
+```
+
+
+#### 위치 인식 실행
+- mapper_params_localization.yaml 파일을 load. 
+- 매핑하는 파라미터 파일과 다른 점은 mode를 localization으로 변경하는 것과 map_file_name, map_start_pose가 추가된 것이초기 위치 설정이 중요하며, 카토그래퍼 처럼 완전히 snap이 발생하지는 않는다. 맵 데이터는 .data, .posegraph로 구성되어 있다
+
+```
+roslaunch slam_toolbox localization.launch 
+```
+
+#### Lifelong mode 실행
+ 
+- localization 모드에서는 serialization, map save가 불가능하며 이러한 기능을 실행하기 위해서는 deserialization을 필요로 하다. 이것을 lifelong launch 파일에서 실행시킬 수 있으모 mapper_params_lifelong.yaml을 load하여 맵 데이터를 불러온다. 
+```
+roslaunch slam_toolbox lifelong.launch 
+```
+
 
 # Introduction
 
@@ -321,45 +346,3 @@ sudo ln -s /home/steve/maps/serialized_map/ /var/snap/slam-toolbox/common
 ```
 
 and then all you have to do when you specify a map to use is set the filename to `slam-toolbox/map_name` and it should work no matter if you're running in a snap, docker, or on bare metal. The `-s` makes a symbol link so rather than `/var/snap/slam-toolbox/common/*` containing the maps, `/var/snap/slam-toolbox/common/serialized_map/*` will. By default on bare metal, the maps will be saved in `.ros`
-
-
-## More Gifs!
-
-![map_image](/images/mapping_steves_apartment.gif?raw=true "Map Image")
-
-If someone from iRobot can use this to tell me my Roomba serial number by correlating to its maps, I'll buy them lunch and probably try to hire them.
-
-
-## 명령어
-
-- 맵 파일 저장
-
-pgm, yaml 형식의 맵 데이터 저장
-```
-rosservice call /slam_toolbox/save_map "name:
-  data: '/home/syscon/catkin_ws/src/slam_toolbox/map/map'" 
-```
-
-- pose graph 관련 파일 저장
-
-/home/syscon 대신 ~을 사용하면 안된다. 절대 경로는 잘 입력 해줘야 한다.
-
-```
-rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
-```
-
-
-- 위치 인식 실행
-mapper_params_localization.yaml 파일을 load. 
-매핑하는 파라미터 파일과 다른 점은 mode를 localization으로 변경하는 것과 map_file_name, map_start_pose가 추가된 것이초기 위치 설정이 중요하며, 카토그래퍼 처럼 완전히 snap이 발생하지는 않는다. 맵 데이터는 .data, .posegraph로 구성되어 있다
-
-```
-roslaunch slam_toolbox localization.launch 
-```
-
- -  Lifelong mode 실행
- 
-localization 모드에서는 serialization, map save가 불가능하며 이러한 기능을 실행하기 위해서는 deserialization을 필요로 하다. 이것을 lifelong launch 파일에서 실행시킬 수 있으모 mapper_params_lifelong.yaml을 load하여 맵 데이터를 불러온다. 
-```
-roslaunch slam_toolbox lifelong.launch 
-```
