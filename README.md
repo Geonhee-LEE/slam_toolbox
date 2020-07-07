@@ -357,3 +357,9 @@ mapper_params_localization.yaml 파일을 load.
 roslaunch slam_toolbox localization.launch 
 ```
 
+ -  Lifelong mode 실행
+ 
+localization 모드에서는 serialization, map save가 불가능하며 이러한 기능을 실행하기 위해서는 deserialization을 필요로 하다. 이것을 lifelong launch 파일에서 실행시킬 수 있으모 mapper_params_lifelong.yaml을 load하여 맵 데이터를 불러온다. 
+```
+roslaunch slam_toolbox lifelong.launch 
+```
