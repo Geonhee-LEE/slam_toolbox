@@ -328,3 +328,32 @@ and then all you have to do when you specify a map to use is set the filename to
 ![map_image](/images/mapping_steves_apartment.gif?raw=true "Map Image")
 
 If someone from iRobot can use this to tell me my Roomba serial number by correlating to its maps, I'll buy them lunch and probably try to hire them.
+
+
+## 명령어
+
+- 맵 파일 저장
+
+pgm, yaml 형식의 맵 데이터 저장
+```
+rosservice call /slam_toolbox/save_map "name:
+  data: '/home/syscon/catkin_ws/src/slam_toolbox/map/map'" 
+```
+
+- pose graph 관련 파일 저장
+
+/home/syscon 대신 ~을 사용하면 안된다. 절대 경로는 잘 입력 해줘야 한다.
+
+```
+rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
+```
+
+
+- 위치 인식 실행
+mapper_params_localization.yaml 파일을 load. 
+매핑하는 파라미터 파일과 다른 점은 mode를 localization으로 변경하는 것과 map_file_name, map_start_pose가 추가된 것이초기 위치 설정이 중요하며, 카토그래퍼 처럼 완전히 snap이 발생하지는 않는다. 맵 데이터는 .data, .posegraph로 구성되어 있다
+
+```
+roslaunch slam_toolbox localization.launch 
+```
+
