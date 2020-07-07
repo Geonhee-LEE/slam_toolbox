@@ -1,6 +1,6 @@
 image: /home/syscon/catkin_ws/src/slam_toolbox/map/map.pgm
 resolution: 0.050000
-origin: [-19.732703, -19.741174, 0.000000]
+origin: [-24.099120, -48.095202, 0.000000]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196
