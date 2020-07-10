@@ -3,21 +3,9 @@
 
 ### 실행 명령어
 
-#### 맵 파일 저장
-
-- pgm, yaml 형식의 맵 데이터 저장
-
+#### Mapping 실행
 ```
-rosservice call /slam_toolbox/save_map "name:
-  data: '/home/syscon/catkin_ws/src/slam_toolbox/map/map'" 
-```
-
-#### pose graph 관련 파일 저장
-
-- pose graph와 연관된 .data, .posegraph 맵 데이터 저장. /home/syscon 대신 ~을 사용하면 안된다. 절대 경로는 잘 입력 해줘야 한다.
-
-```
-rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
+roslaunch slam_toolbox online_sync.launch
 ```
 
 
@@ -35,6 +23,24 @@ roslaunch slam_toolbox localization.launch
 ```
 roslaunch slam_toolbox lifelong.launch 
 ```
+
+#### 맵 파일 저장
+
+- pgm, yaml 형식의 맵 데이터 저장
+
+```
+rosservice call /slam_toolbox/save_map "name:
+  data: '/home/syscon/catkin_ws/src/slam_toolbox/map/map'" 
+```
+
+#### pose graph 관련 파일 저장
+
+- pose graph와 연관된 .data, .posegraph 맵 데이터 저장. /home/syscon 대신 ~을 사용하면 안된다. 절대 경로는 잘 입력 해줘야 한다.
+
+```
+rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
+```
+
 
 
 # Introduction
