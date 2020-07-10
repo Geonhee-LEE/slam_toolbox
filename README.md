@@ -1,7 +1,12 @@
 ## Slam Toolbox
 
+### 시뮬레이션 실행 명령어
+```
+roslaunch sp_gazebo large_map.gazebo.launch --screen
+```
 
-### 실행 명령어
+
+### Slam Toolbox 실행 명령어
 
 #### Mapping mode 실행
 ```
