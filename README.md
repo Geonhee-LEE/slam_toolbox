@@ -41,6 +41,34 @@ rosservice call /slam_toolbox/save_map "name:
 rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
 ```
 
+#### Pose graph 관련 파일 Load
+
+- Lifelong이 실행되었을 시에 pose graph 데이터 load 및 초기위치를 세팅 할 수 있다.
+
+```
+rosservice call /slam_toolbox/deserialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'
+match_type: 2
+initial_pose:
+  x: 1.0
+  y: 0.0
+  theta: 0.0" 
+
+```
+
+- Srv 타입: DeserializePoseGraph.srv
+  ```
+  int8 UNSET = 0
+  int8 START_AT_FIRST_NODE = 1
+  int8 START_AT_GIVEN_POSE = 2
+  int8 LOCALIZE_AT_POSE = 3
+
+  # inital_pose should be Map -> base_frame (parameter, generally base_link)  #
+
+  string filename
+  int8 match_type
+  geometry_msgs/Pose2D initial_pose
+  ```
+
 
 
 # Introduction
