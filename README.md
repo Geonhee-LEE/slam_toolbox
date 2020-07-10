@@ -3,13 +3,13 @@
 
 ### 실행 명령어
 
-#### Mapping 실행
+#### Mapping mode 실행
 ```
 roslaunch slam_toolbox online_sync.launch
 ```
 
 
-#### 위치 인식 실행
+#### Localization mode 실행
 - mapper_params_localization.yaml 파일을 load. 
 - 매핑하는 파라미터 파일과 다른 점은 mode를 localization으로 변경하는 것과 map_file_name, map_start_pose가 추가된 것이초기 위치 설정이 중요하며, 카토그래퍼 처럼 완전히 snap이 발생하지는 않는다. 맵 데이터는 .data, .posegraph로 구성되어 있다
 
@@ -58,9 +58,9 @@ initial_pose:
 - Srv 타입: DeserializePoseGraph.srv
   ```
   int8 UNSET = 0
-  int8 START_AT_FIRST_NODE = 1
-  int8 START_AT_GIVEN_POSE = 2
-  int8 LOCALIZE_AT_POSE = 3
+  int8 START_AT_FIRST_NODE = 1 # 실행시 param 파일에 대해서 위치 load
+  int8 START_AT_GIVEN_POSE = 2 # initial pose에 대해서 위치 load 
+  int8 LOCALIZE_AT_POSE = 3 # localization mode시에 
 
   # inital_pose should be Map -> base_frame (parameter, generally base_link)  #
 
