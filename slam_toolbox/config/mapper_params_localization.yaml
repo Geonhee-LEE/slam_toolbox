@@ -7,14 +7,15 @@ ceres_dogleg_type: TRADITIONAL_DOGLEG
 ceres_loss_function: None
 
 # ROS Parameters
-odom_frame: odom
+odom_frame: R_011/odom
 map_frame: map
-base_frame: base_footprint
-scan_topic: /scan
+base_frame: R_011/base_footprint
+scan_topic: /R_011/scan
+
 mode: localization
 
 # if you'd like to start localizing on bringup in a map and pose
-map_file_name: /home/syscon/catkin_ws/src/slam_toolbox/map/test
+map_file_name: /home/syscon/catkin_ws/src/slam_toolbox/map/pose_graph
 map_start_pose: [0.0, 0.0, 0.0]
 
 debug_logging: false
