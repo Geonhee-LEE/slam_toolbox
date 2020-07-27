@@ -1,7 +1,11 @@
 <launch>
 
   <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" output="screen">
-    <rosparam command="load" file="$(find slam_toolbox)/config/mapper_params_online_sync.yaml" />
+    <rosparam command="load" file="$(find slam_toolbox)/config/mapper_params_online_sync.yaml"  />
+<param name="odom_frame" value="$(env ROS_HOSTNAME)/odom"/>
+<param name="base_frame" value="$(env ROS_HOSTNAME)/base_footprint"/>
+<param name="scan_topic" value="/$(env ROS_HOSTNAME)/scan"/>
+
   </node>
 
 </launch>
