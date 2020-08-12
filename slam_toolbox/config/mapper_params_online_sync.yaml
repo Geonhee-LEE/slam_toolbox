@@ -7,10 +7,10 @@ ceres_dogleg_type: TRADITIONAL_DOGLEG
 ceres_loss_function: None
 
 # ROS Parameters
-odom_frame: R_011/odom
+odom_frame: odom
 map_frame: map
-base_frame: R_011/base_footprint
-scan_topic: /R_011/scan
+base_frame: base_footprint
+scan_topic: /scan
 mode: mapping #localization
 
 # if you'd like to immediately start continuing a map at a given pose
