@@ -1,19 +1,20 @@
 ## Slam Toolbox
 
-### 시뮬레이션 실행 명령어
+## 시뮬레이션 실행 명령어
 ```
 roslaunch sp_gazebo large_map_for_mapping.launch --screen
 ```
 
 
-### Slam Toolbox 실행 명령어
+## Slam Toolbox 실행 명령어
 
-#### Mapping mode 실행
+### Mapping mode 실행
+----
 ```
 roslaunch slam_toolbox online_sync.launch
 ```
 
-##### 맵 파일 저장
+#### 맵 파일 저장
 
 - pgm, yaml 형식의 맵 데이터 저장
 
@@ -21,7 +22,7 @@ roslaunch slam_toolbox online_sync.launch
 rosservice call /slam_toolbox/save_map "name:
   data: '/home/syscon/catkin_ws/src/slam_toolbox/map/map'" 
 ```
-##### pose graph 관련 파일 저장
+#### pose graph 관련 파일 저장
 
 - pose graph와 연관된 .data, .posegraph 맵 데이터 저장. /home/syscon 대신 ~을 사용하면 안된다. 절대 경로는 잘 입력 해줘야 한다.
 
@@ -29,7 +30,8 @@ rosservice call /slam_toolbox/save_map "name:
 rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
 ```
 
-#### Localization mode 실행
+### Localization mode 실행
+-----
 - mapper_params_localization.yaml 파일을 load. 
 - 매핑하는 파라미터 파일과 다른 점은 mode를 localization으로 변경하는 것과 map_file_name, map_start_pose가 추가된 것이초기 위치 설정이 중요하며, 카토그래퍼 처럼 완전히 snap이 발생하지는 않는다. 맵 데이터는 .data, .posegraph로 구성되어 있다
 
@@ -37,14 +39,15 @@ rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/s
 roslaunch slam_toolbox localization.launch 
 ```
 
-#### Lifelong mode 실행
+### Lifelong mode 실행
+-----
  
 - localization 모드에서는 serialization, map save가 불가능하며 이러한 기능을 실행하기 위해서는 deserialization을 필요로 하다. 이것을 lifelong launch 파일에서 실행시킬 수 있으모 mapper_params_lifelong.yaml을 load하여 맵 데이터를 불러온다. 
 ```
 roslaunch slam_toolbox lifelong.launch 
 ```
 
-##### Pose graph 관련 파일 Load
+#### Pose graph 관련 파일 Load
 
 - Lifelong이 실행되었을 시에 pose graph 데이터 load 및 초기위치를 세팅 할 수 있다.
 
@@ -73,19 +76,19 @@ initial_pose:
   ```
 
 
-#### Map merge mode 실행
+### Map merge mode 실행
 - pose graph data들을 불러들여 하나의 맵으로 생성할 수 있다.
 ```
 roslaunch slam_toolbox merge_maps_kinematic.launch 
 ```
 
-##### Submap 추가
+#### Submap 추가
 - pose graph를 submap으로 추가할 수 있다.
 ```
 rosservice call /map_merging/add_submap "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test5'
 ```
 
-##### Map merge 실행
+#### Map merge 실행
 - 각 submap들에 대해 "map_N" topic을 출력하고, 이를 하나의 "/map"   
 ``` 
 rosservice call /map_merging/merge_submaps "{}" 
