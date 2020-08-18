@@ -2,7 +2,7 @@
 
 ### 시뮬레이션 실행 명령어
 ```
-roslaunch sp_gazebo large_map.gazebo.launch --screen
+roslaunch sp_gazebo large_map_for_mapping.launch --screen
 ```
 
 
