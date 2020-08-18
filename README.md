@@ -13,6 +13,21 @@ roslaunch sp_gazebo large_map_for_mapping.launch --screen
 roslaunch slam_toolbox online_sync.launch
 ```
 
+##### 맵 파일 저장
+
+- pgm, yaml 형식의 맵 데이터 저장
+
+```
+rosservice call /slam_toolbox/save_map "name:
+  data: '/home/syscon/catkin_ws/src/slam_toolbox/map/map'" 
+```
+##### pose graph 관련 파일 저장
+
+- pose graph와 연관된 .data, .posegraph 맵 데이터 저장. /home/syscon 대신 ~을 사용하면 안된다. 절대 경로는 잘 입력 해줘야 한다.
+
+```
+rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
+```
 
 #### Localization mode 실행
 - mapper_params_localization.yaml 파일을 load. 
@@ -29,24 +44,7 @@ roslaunch slam_toolbox localization.launch
 roslaunch slam_toolbox lifelong.launch 
 ```
 
-#### 맵 파일 저장
-
-- pgm, yaml 형식의 맵 데이터 저장
-
-```
-rosservice call /slam_toolbox/save_map "name:
-  data: '/home/syscon/catkin_ws/src/slam_toolbox/map/map'" 
-```
-
-#### pose graph 관련 파일 저장
-
-- pose graph와 연관된 .data, .posegraph 맵 데이터 저장. /home/syscon 대신 ~을 사용하면 안된다. 절대 경로는 잘 입력 해줘야 한다.
-
-```
-rosservice call /slam_toolbox/serialize_map "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test'"
-```
-
-#### Pose graph 관련 파일 Load
+##### Pose graph 관련 파일 Load
 
 - Lifelong이 실행되었을 시에 pose graph 데이터 load 및 초기위치를 세팅 할 수 있다.
 
@@ -74,6 +72,24 @@ initial_pose:
   geometry_msgs/Pose2D initial_pose
   ```
 
+
+#### Map merge mode 실행
+- pose graph data들을 불러들여 하나의 맵으로 생성할 수 있다.
+```
+roslaunch slam_toolbox merge_maps_kinematic.launch 
+```
+
+##### Submap 추가
+- pose graph를 submap으로 추가할 수 있다.
+```
+rosservice call /map_merging/add_submap "filename: '/home/syscon/catkin_ws/src/slam_toolbox/map/test5'
+```
+
+##### Map merge 실행
+- 각 submap들에 대해 "map_N" topic을 출력하고, 이를 하나의 "/map"   
+``` 
+rosservice call /map_merging/merge_submaps "{}" 
+```
 
 
 # Introduction
