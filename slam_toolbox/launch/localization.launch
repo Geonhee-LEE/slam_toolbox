@@ -2,11 +2,11 @@
 
   <node pkg="slam_toolbox" type="localization_slam_toolbox_node" name="slam_toolbox" output="screen">
     <rosparam command="load" file="$(find slam_toolbox)/config/mapper_params_localization.yaml" />
-<param name="odom_frame" value="$(env ROS_HOSTNAME)/odom"/>
-<param name="base_frame" value="$(env ROS_HOSTNAME)/base_footprint"/>
-<param name="scan_topic" value="/$(env ROS_HOSTNAME)/scan"/>
+<param name="odom_frame" value="odom"/>
+<param name="base_frame" value="base_footprint"/>
+<param name="scan_topic" value="scan"/>
 
-<remap from="initialpose" to="/$(env ROS_HOSTNAME)/initialpose"/>
+<remap from="initialpose" to="initialpose"/>
 
   </node>
 
