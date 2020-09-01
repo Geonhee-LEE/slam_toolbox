@@ -4,14 +4,13 @@ ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
 ceres_preconditioner: SCHUR_JACOBI
 ceres_trust_strategy: LEVENBERG_MARQUARDT
 ceres_dogleg_type: TRADITIONAL_DOGLEG
-ceres_loss_function: None
+ceres_loss_function: HuberLoss
 
 # ROS Parameters
 odom_frame: odom
 map_frame: map
 base_frame: base_footprint
 scan_topic: /scan
-mode: mapping
 
 # lifelong params
 lifelong_search_use_tree: false
@@ -26,7 +25,7 @@ lifelong_candidates_scale: 0.03
 # if you'd like to immediately start continuing a map at a given pose
 # or at the dock, but they are mutually exclusive, if pose is given
 # will use pose
-map_file_name: /home/syscon/catkin_ws/src/slam_toolbox/map/test
+map_file_name: /home/syscon/catkin_ws/src/slam_toolbox/map/pose_graph
 map_start_pose: [0.0, 0.0, 0.0]
 map_start_at_dock: true
 
@@ -51,7 +50,7 @@ scan_buffer_maximum_scan_distance: 10
 link_match_minimum_response_fine: 0.1  
 link_scan_maximum_distance: 1.5
 loop_search_maximum_distance: 3.0
-do_loop_closing: true 
+do_loop_closing: true
 loop_match_minimum_chain_size: 10           
 loop_match_maximum_variance_coarse: 3.0  
 loop_match_minimum_response_coarse: 0.35    
