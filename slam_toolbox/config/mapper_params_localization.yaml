@@ -14,7 +14,7 @@ scan_topic: /scan
 mode: localization
 
 # if you'd like to start localizing on bringup in a map and pose
-map_file_name: /home/syscon/catkin_ws/src/slam_toolbox/map/test
+map_file_name: /home/syscon/pilot_lifelong_mapping/map3/pose_graph
 map_start_pose: [0.0, 0.0, 0.0]
 
 debug_logging: false
